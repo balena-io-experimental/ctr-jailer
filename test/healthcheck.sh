@@ -75,6 +75,7 @@ case $(id -u) in
     if command -v iptables-legacy >/dev/null 2>&1; then
         iptables-legacy -V
         iptables-legacy -L
+        iptables-legacy -A INPUT -p tcp --dport 9999 -j ACCEPT -m comment --comment "Test rule for ipt_comment module"
     fi
 
     if command -v iptables-nft >/dev/null 2>&1; then
