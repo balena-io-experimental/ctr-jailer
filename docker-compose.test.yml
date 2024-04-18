@@ -19,6 +19,11 @@ services:
       - /bin/sh
       - -c
       - |
+        if [[ "$(uname -m)" != "x86_64" ]] && [[ -z "$(ls /dev/kvm)" ]]; then
+          echo "Nested KVM unavailable on this architecture!"
+          exit 0
+        fi
+
         set -ex
         apk add --no-cache docker-cli-compose
 
