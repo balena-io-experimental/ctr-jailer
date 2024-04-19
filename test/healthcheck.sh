@@ -75,7 +75,6 @@ case $(id -u) in
     if command -v iptables-legacy >/dev/null 2>&1; then
         iptables-legacy -V
         iptables-legacy -L
-        iptables-legacy -A INPUT -p tcp --dport 9999 -j ACCEPT -m comment --comment "Test rule for ipt_comment module"
     fi
 
     if command -v iptables-nft >/dev/null 2>&1; then
@@ -84,6 +83,7 @@ case $(id -u) in
         iptables-nft -N DOCKER-ISOLATION-STAGE-1
         iptables-nft -L
         iptables-nft -I DOCKER-ISOLATION-STAGE-1 -j RETURN
+        iptables-nft -A INPUT -p tcp --dport 9999 -j ACCEPT -m comment --comment "Test rule for ipt_comment module"
     fi
     ;;
 *) ;;
